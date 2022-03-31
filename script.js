@@ -1,12 +1,18 @@
 let prevNumber ='';
 let calculatorOperation ='';
 let currentNumber ='0';
+let equationStr = '';
 let startEq = false;
 
 const calculatorScreen = document.querySelector('.calculator-screen');
+const calculatorEquation = document.querySelector('.calculator-equation');
 
 const updateScreen = (number) => {
     calculatorScreen.value = number;
+};
+
+const updateEquation = (equation) => {
+    calculatorEquation.value = equation;
 };
 
 const inputNumber = (number) => {
@@ -22,9 +28,18 @@ const inputNumber = (number) => {
     }
 };
 
+const inputEquation = (equation) => {
+    if (equationStr === '0'){
+        equationStr = equation;
+    } else {
+        equationStr += equation;
+    }
+}
+
 
 // operator
 const inputOperator = (operator) =>  {
+    if (calculatorOperation !== '') calculate();
     calculatorOperation = operator;
     prevNumber = currentNumber;
     //currentNumber = '0';
@@ -44,7 +59,9 @@ numbers.forEach((number) => {
         // add event while clicked
         inputNumber(event.target.value);
         updateScreen(currentNumber);
-
+        inputEquation(currentNumber);
+        updateEquation(equationStr);
+        console.log(equationStr);
     })   
 });
 
@@ -54,6 +71,8 @@ operators.forEach((operator) => {
     operator.addEventListener("click", (event) => {
         inputOperator(event.target.value);
         updateScreen(event.target.value);
+        inputEquation(` ${event.target.value} `);
+        updateEquation(equationStr);
     })   
 });
 
@@ -62,6 +81,8 @@ const equal = document.querySelector(".equal-sign");
 equal.addEventListener("click", () => {
     calculate();
     updateScreen(currentNumber);
+    inputEquation(` = ${currentNumber}`);
+    updateEquation(equationStr);
 });
 
 
@@ -70,6 +91,7 @@ const percentage = document.querySelector(".percentage");
 percentage.addEventListener("click", () => {
     percentageNum();
     updateScreen(currentNumber);
+    updateEquation(currentNumber);
 });
 
 const clearer = document.querySelector(".all-clear");
@@ -77,6 +99,8 @@ const clearer = document.querySelector(".all-clear");
 clearer.addEventListener("click", () => {
     clearAll();
     updateScreen(currentNumber);
+    inputEquation(currentNumber);
+    updateEquation(equationStr);
 });
 
 const decimal = document.querySelector(".decimal");
@@ -84,11 +108,14 @@ const decimal = document.querySelector(".decimal");
 decimal.addEventListener("click", (event) => {
     inputDecimal(event.target.value);
     updateScreen(currentNumber);
+    inputEquation(currentNumber);
+    updateEquation(equationStr);
 });
 
 const clearAll = () => {
     currentNumber = '0';
     prevNumber = '0';
+    equationStr = '';
     calculatorOperation = '';
     startEq = false;
 };
@@ -97,7 +124,7 @@ const percentageNum = () => {
     currentNumber = (parseFloat(currentNumber) / 100).toString();
     prevNumber = currentNumber;
     startEq = false;
-}
+};
 
 const calculate = () => {
     let result = 0;
