@@ -22,6 +22,8 @@ const inputNumber = (number) => {
     }
 };
 
+
+// operator
 const inputOperator = (operator) =>  {
     calculatorOperation = operator;
     prevNumber = currentNumber;
