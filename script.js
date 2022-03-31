@@ -99,7 +99,7 @@ const calculate = () => {
             return;
     }
 
-    if (result / parseInt(result) > 0) {
+    if (result % parseInt(result) > 0) {
         currentNumber = parseInt(result).toString();
     } else {
         currentNumber = result.toString();
