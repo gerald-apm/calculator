@@ -25,7 +25,8 @@ const inputNumber = (number) => {
 const inputOperator = (operator) =>  {
     calculatorOperation = operator;
     prevNumber = currentNumber;
-    currentNumber = '0';
+    //currentNumber = '0';
+    startEq = false;
 };
 
 
