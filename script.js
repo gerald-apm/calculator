@@ -16,6 +16,18 @@ const inputNumber = (number) => {
     }
 };
 
+const inputOperator = (operator) =>  {
+    calculatorOperation = operator;
+    prevNumber = currentNumber;
+    currentNumber = '0';
+};
+
+
+const inputDecimal = (dot) =>  {
+    if (currentNumber.includes(".")) return;
+    currentNumber += dot;
+};
+
 const numbers = document.querySelectorAll(".number");
 
 numbers.forEach((number) => {
@@ -31,9 +43,64 @@ const operators = document.querySelectorAll(".operator");
 
 operators.forEach((operator) => {
     operator.addEventListener("click", (event) => {
-        // add event while clicked
-        calculatorOperation = event.target.value;
-        console.log(calculatorOperation);
+        inputOperator(event.target.value);
     })   
 });
 
+const equal = document.querySelector(".equal-sign");
+
+equal.addEventListener("click", () => {
+    calculate();
+    updateScreen(currentNumber);
+})
+
+
+const clearer = document.querySelector(".all-clear");
+
+clearer.addEventListener("click", () => {
+    clearAll();
+    updateScreen(currentNumber);
+});
+
+const decimal = document.querySelector(".decimal");
+
+decimal.addEventListener("click", (event) => {
+    inputDecimal(event.target.value);
+    updateScreen(currentNumber);
+});
+
+const clearAll = () => {
+    currentNumber = '0';
+    prevNumber = '0';
+    calculatorOperation = '';
+};
+
+const calculate = () => {
+    let result = 0;
+    let number1 = parseFloat(prevNumber);
+    let number2 = parseFloat(currentNumber);
+    switch (calculatorOperation) {
+        case '+':
+            result = number1 + number2;
+            break;
+        case '-':
+            result = number1 - number2;
+            break;
+        case '*':
+            result = number1 * number2;
+            break;
+        case '/':
+            result = number1 / number2;
+            break;
+        default:
+            return;
+    }
+
+    if (result / parseInt(result) > 0) {
+        currentNumber = result.toString();
+    } else {
+
+    }
+    
+    calculatorOperation = '';
+};
