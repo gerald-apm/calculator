@@ -9,6 +9,8 @@ const updateScreen = (number) => {
 };
 
 const inputNumber = (number) => {
+    console.log(currentNumber);
+    console.log(prevNumber);
     if (currentNumber === prevNumber) currentNumber = '0';
 
     if (currentNumber === '0'){
@@ -55,8 +57,15 @@ const equal = document.querySelector(".equal-sign");
 equal.addEventListener("click", () => {
     calculate();
     updateScreen(currentNumber);
-})
+});
 
+
+const percentage = document.querySelector(".percentage");
+
+percentage.addEventListener("click", () => {
+    percentageNum();
+    updateScreen(currentNumber);
+});
 
 const clearer = document.querySelector(".all-clear");
 
@@ -77,6 +86,10 @@ const clearAll = () => {
     prevNumber = '0';
     calculatorOperation = '';
 };
+
+const percentageNum = () => {
+    currentNumber = (parseFloat(currentNumber) / 100).toString();
+}
 
 const calculate = () => {
     let result = 0;
