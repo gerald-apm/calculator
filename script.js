@@ -1,5 +1,5 @@
 let prevNumber = "";
-let calculatorOperation = "";
+let calculatorOperator = "";
 let currentNumber = "0";
 let equationStr = "";
 let startEq = false;
@@ -38,8 +38,8 @@ const inputEquation = (equation) => {
 
 // operator
 const inputOperator = (operator) => {
-  if (calculatorOperation !== "") calculate();
-  calculatorOperation = operator;
+  if (calculatorOperator !== "") calculate();
+  calculatorOperator = operator;
   prevNumber = currentNumber;
   //currentNumber = '0';
   startEq = false;
@@ -59,7 +59,7 @@ numbers.forEach((number) => {
     updateScreen(currentNumber);
     inputEquation(currentNumber);
     updateEquation(equationStr);
-    console.log(calculatorOperation);
+    console.log(calculatorOperator);
   });
 });
 
@@ -113,7 +113,7 @@ const clearAll = () => {
   currentNumber = "0";
   prevNumber = "0";
   equationStr = "";
-  calculatorOperation = "";
+  calculatorOperator = "";
   startEq = false;
 };
 
@@ -127,7 +127,7 @@ const calculate = () => {
   let result = 0;
   let number1 = parseFloat(prevNumber);
   let number2 = parseFloat(currentNumber);
-  switch (calculatorOperation) {
+  switch (calculatorOperator) {
     case "+":
       result = number1 + number2;
       break;
@@ -153,5 +153,5 @@ const calculate = () => {
   currentNumber = result.toString();
   prevNumber = currentNumber;
   startEq = false;
-  calculatorOperation = "";
+  calculatorOperator = "";
 };
