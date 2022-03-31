@@ -59,7 +59,7 @@ numbers.forEach((number) => {
     updateScreen(currentNumber);
     inputEquation(currentNumber);
     updateEquation(equationStr);
-    console.log(equationStr);
+    console.log(calculatorOperation);
   });
 });
 
@@ -144,11 +144,13 @@ const calculate = () => {
       return;
   }
 
-  if (result % parseInt(result) > 0) {
-    currentNumber = parseInt(result).toString();
-  } else {
-    currentNumber = result.toString();
-  }
+  //   if (result % parseInt(result) > 0) {
+  //     currentNumber = parseInt(result).toString();
+  //   } else {
+  //     currentNumber = result.toString();
+  //   }
+
+  currentNumber = result.toString();
   prevNumber = currentNumber;
   startEq = false;
   calculatorOperation = "";
