@@ -9,6 +9,8 @@ const updateScreen = (number) => {
 };
 
 const inputNumber = (number) => {
+    if (currentNumber === prevNumber) currentNumber = '0';
+
     if (currentNumber === '0'){
         currentNumber = number;
     } else {
@@ -44,6 +46,7 @@ const operators = document.querySelectorAll(".operator");
 operators.forEach((operator) => {
     operator.addEventListener("click", (event) => {
         inputOperator(event.target.value);
+        updateScreen(event.target.value);
     })   
 });
 
@@ -97,10 +100,11 @@ const calculate = () => {
     }
 
     if (result / parseInt(result) > 0) {
-        currentNumber = result.toString();
+        currentNumber = parseInt(result).toString();
     } else {
-
+        currentNumber = result.toString();
     }
+    prevNumber = currentNumber;
     
     calculatorOperation = '';
 };
