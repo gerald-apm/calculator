@@ -1,6 +1,7 @@
 let prevNumber ='';
 let calculatorOperation ='';
 let currentNumber ='0';
+let startEq = false;
 
 const calculatorScreen = document.querySelector('.calculator-screen');
 
@@ -9,9 +10,10 @@ const updateScreen = (number) => {
 };
 
 const inputNumber = (number) => {
-    console.log(currentNumber);
-    console.log(prevNumber);
-    if (currentNumber === prevNumber) currentNumber = '0';
+    if (currentNumber === prevNumber && startEq === false) {
+        currentNumber = '0';
+        startEq = true;
+    }
 
     if (currentNumber === '0'){
         currentNumber = number;
@@ -85,10 +87,13 @@ const clearAll = () => {
     currentNumber = '0';
     prevNumber = '0';
     calculatorOperation = '';
+    startEq = false;
 };
 
 const percentageNum = () => {
     currentNumber = (parseFloat(currentNumber) / 100).toString();
+    prevNumber = currentNumber;
+    startEq = false;
 }
 
 const calculate = () => {
@@ -118,6 +123,6 @@ const calculate = () => {
         currentNumber = result.toString();
     }
     prevNumber = currentNumber;
-    
+    startEq = false;
     calculatorOperation = '';
 };
