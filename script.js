@@ -57,9 +57,8 @@ numbers.forEach((number) => {
     // add event while clicked
     inputNumber(event.target.value);
     updateScreen(currentNumber);
-    inputEquation(currentNumber);
+    inputEquation(event.target.value);
     updateEquation(equationStr);
-    console.log(calculatorOperator);
   });
 });
 
@@ -105,9 +104,22 @@ const decimal = document.querySelector(".decimal");
 decimal.addEventListener("click", (event) => {
   inputDecimal(event.target.value);
   updateScreen(currentNumber);
-  inputEquation(currentNumber);
+  inputEquation(event.target.value);
   updateEquation(equationStr);
 });
+
+const deleter = document.querySelector(".deleter");
+
+deleter.addEventListener("click", () => {
+  deleteEquation();
+  updateScreen(currentNumber);
+  updateEquation(equationStr);
+});
+
+const deleteEquation = () => {
+  currentNumber = currentNumber.slice(0, -1);
+  equationStr = equationStr.slice(0, -1);
+};
 
 const clearAll = () => {
   currentNumber = "0";

@@ -81,7 +81,6 @@ button:active:after {
   transition: 0s;
 }
 
-.all-clear,
 .zero-btn {
   width: 50%;
 }
